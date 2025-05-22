@@ -1,4 +1,5 @@
 import express from "express";
+import fs from "fs";
 
 const app = express();
 const port = 3000;
@@ -11,38 +12,8 @@ app.get("/", (req, res) => {
 
 app.get("/bacheca", (req, res) => {
 
-  const foodPosts = [
-    {
-      titolo: "Pasta alla carbonara perfetta",
-      contenuto: "La ricetta tradizionale romana passo dopo passo.",
-      immagine: "img/pasta-alla-carbonara.jpg",
-      tags: ["pasta", "italiana", "ricetta"]
-    },
-    {
-      titolo: "Dolci facili senza forno",
-      contenuto: "Idee veloci per dessert freschi e golosi.",
-      immagine: "img/dolci-senza-forno.jpg",
-      tags: ["dolci", "senza forno", "facili"]
-    },
-    {
-      titolo: "Come fare il pane in casa",
-      contenuto: "Guida completa per impastare, far lievitare e cuocere un pane fragrante.",
-      immagine: "img/pane-in-casa.avif",
-      tags: ["pane", "lievitazione", "cucina"]
-    },
-    {
-      titolo: "Ricette vegetariane gustose",
-      contenuto: "Piatti sani e deliziosi senza carne.",
-      immagine: "img/Ricette-vegetariane-gustose.jpeg",
-      tags: ["vegetariano", "salutare", "ricette"]
-    },
-    {
-      titolo: "Cocktail estivi rinfrescanti",
-      contenuto: "Bevande perfette per le giornate calde, anche in versione analcolica.",
-      immagine: "img/Cocktail-estivi-rinfrescanti.jpeg",
-      tags: ["cocktail", "estate", "bevande"]
-    }
-  ];
+  const arrayFoodJson = fs.readFileSync("foodData.json");
+  const foodPosts = JSON.parse(arrayFoodJson)
 
   const dataJason = {
     data: foodPosts,
